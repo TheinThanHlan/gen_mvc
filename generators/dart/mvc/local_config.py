@@ -1,4 +1,5 @@
 model_dir="{program_root}/{program_name}/lib/data/model/"
+dao_dir="{program_root}/{program_name}/lib/data/dao/"
 types={
     "string":{
         "name":"String",
@@ -77,4 +78,8 @@ def getBuiltinVariableDefault(var,isOptional):
         raise Exception("in variable type '"+var+"' the default value must be specify" )
     else:
         return types.get(output,{}).get("builtin_default","")
+
+
+
+
 

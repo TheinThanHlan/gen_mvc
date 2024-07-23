@@ -14,35 +14,22 @@ def generate(class_name,data,program_config):
 
 def generate_class(class_name,data,program_config):
     MODEL_CLASS_TEMPLATE="""
-{imports}
+import 'package:{program_name}/mvc_template/interface/IMVCModel.dart';
 class {class_name} implements IMVCModel{{
     {variables}
     {constructor}
 }}
 """
-    imports=generate_imports(class_name,data,program_config)
     constructor=generate_constructor(class_name,data,program_config)
     variables=generate_variables(class_name,data,program_config)
-    return MODEL_CLASS_TEMPLATE.format(class_name=class_name,variables=variables,constructor=constructor,imports=imports)
+    return MODEL_CLASS_TEMPLATE.format(class_name=class_name,
+                                       variables=variables,constructor=constructor
+                                       ,program_name=program_config.get("name"))
 
 
 
 
 
-
-def generate_imports(class_name,data,program_config):
-    IMPORT_TEMPLATE="""
-import 'package:{program_name}/data/model/{class_name}.dart';
-    """
-    imports="""
-import 'package:testproj/mvc_template/interface/IMVCModel.dart';
-    """
-    for a in data.get(class_name).get("variables"):
-        class_name=a.get("type").split("<")[-1]
-        if(not class_name in local_config.types.keys()):
-            imports+=IMPORT_TEMPLATE.format(program_name=program_config.get("name"),class_name=class_name)
-
-    return imports;
 
 
 
