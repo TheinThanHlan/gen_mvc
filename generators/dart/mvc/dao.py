@@ -15,7 +15,7 @@ def generate(class_name,data,program_config):
 
 def generate_class(class_name,data,program_config):
     MODEL_CLASS_TEMPLATE="""
-import 'package:{program_name}/mvc_template/interface/IMVCModel.dart';
+import 'package:{program_name}/mvc_template/interface/IMVCDao.dart';
 import 'package:{program_name}/data/model/{class_name}.dart';
 
 class {class_name}Dao implements IMVCDao<{class_name}>{{

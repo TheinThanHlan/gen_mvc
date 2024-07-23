@@ -1,9 +1,8 @@
-model_dir="{program_root}/{program_name}/lib/data/model/"
-dao_dir="{program_root}/{program_name}/lib/data/dao/"
 types={
     "string":{
         "name":"String",
-        "builtin_default":'""'
+        "builtin_default":'""',
+        "sql_type":"varchar"
     },
     "int": {
         "name": "int",
