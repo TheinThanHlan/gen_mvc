@@ -1,40 +1,48 @@
 types={
-    "string":{
-        "name":"String",
-        "builtin_default":'""',
-        "sql_type":"varchar"
+    "string": {
+        "name": "String",
+        "builtin_default": "\"\"",
+        "sqlite": "TEXT"
     },
     "int": {
         "name": "int",
-        "builtin_default":"0"
+        "builtin_default": "0",
+        "sqlite": "INTEGER"
     },
     "long": {
         "name": "int",
-        "builtin_default":"0"
+        "builtin_default": "0",
+        "sqlite": "INTEGER"
     },
     "double": {
-          "name": "double",
-          "builtin_default":"0.0"
+        "name": "double",
+        "builtin_default": "0.0",
+        "sqlite": "REAL"
     },
     "float": {
-          "name": "double",
-          "builtin_default":"0.0"
+        "name": "double",
+        "builtin_default": "0.0",
+        "sqlite": "REAL"
     },
     "bool": {
         "name": "bool",
-        "builtin_default":"false"
+        "builtin_default": "false",
+        "sqlite": "INTEGER"  # SQLite does not have a separate Boolean storage class. Instead, boolean values are stored as integers 0 (false) and 1 (true).
     },
     "list": {
         "name": "List",
-        "builtin_default":"[]"
+        "builtin_default": "[]",
+        "sqlite": "TEXT"  # In SQLite, complex types like lists are often stored as TEXT (e.g., JSON strings).
     },
     "map": {
         "name": "Map",
-        "builtin_default":"{}"
+        "builtin_default": "{}",
+        "sqlite": "TEXT"  # As above, stored as JSON strings.
     },
-    "datetime":{
-        "name":"DateTime",
-        "builtin_default":"DateTime.now()"
+    "datetime": {
+        "name": "DateTime",
+        "builtin_default": "DateTime.now()",
+        "sqlite": "TEXT"  # SQLite stores dates and times as TEXT, REAL, or INTEGER.
     }
 
 }

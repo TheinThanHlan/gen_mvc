@@ -16,5 +16,4 @@ def generate(generator_root,program_root):
         with open(input_dir+a) as f:
             data[b]=eval(f.read())
 
-    for class_name in data.keys():
-        dart.generate(class_name,data,program_config,program_root)
+    dart.generate(data,program_config,program_root)
