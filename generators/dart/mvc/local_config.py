@@ -47,6 +47,7 @@ types={
 
 }
 
+
 def variableTypeParser(var):
     output = ""
     if ("<" not in var) and (">" not in var):
@@ -69,7 +70,7 @@ def variableTypeParser(var):
                 b += a
     return output
 
-def getBuiltinVariableDefault(var,isOptional):
+def getBuiltinVariableDefault(var,constraints):
     output = ""
     if ("<" not in var) and (">" not in var) :
         output = var;
@@ -81,11 +82,10 @@ def getBuiltinVariableDefault(var,isOptional):
                 break
             else:
                 b += a
-    if(not output in types.keys() and  isOptional==False):
+    if (not output in types.keys()) and  ("not null" in constraints.lower() or  "primary key" in constraints.lower()):
         raise Exception("in variable type '"+var+"' the default value must be specify" )
     else:
         return types.get(output,{}).get("builtin_default","")
-
 
 
 

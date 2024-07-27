@@ -1,1 +1,1 @@
-print("View")
+print("view")

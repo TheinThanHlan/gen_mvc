@@ -41,7 +41,7 @@ def generate_variables(class_name,data,program_config):
     """
     variables=""
     for a in data.get(class_name).get("variables"):
-        required        = "?" if a.get("isOptional")==True else ""
+        required        = "?" if not ("not null" in a.get("constraints").lower() and "primary key" in a.get("constraints").lower()) else ""
         variable_name   =a.get("name")
         variable_type   =local_config.variableTypeParser(a.get("type"))
         variables+=MODEL_VARIABLE_TEMPLATE.format(
@@ -75,10 +75,10 @@ def generate_constructor(class_name,data,program_config):
     for index,a in enumerate(data.get(class_name).get("variables")):
         variable_name   =a.get("name")
         variable_type   =local_config.variableTypeParser(a.get("type"))
-        required        = "?" if a.get("isOptional")==True else ""
+        required        = "?" if not ("not null" in a.get("constraints").lower() and "primary key" in a.get("constraints").lower()) else ""
         #check if the user gave the default
         default         =a.get("default")
-        default         =default if (default!=None and default!="") else local_config.getBuiltinVariableDefault(a.get("type"),a.get("isOptional"))
+        default         =default if (default!=None and default!="") else local_config.getBuiltinVariableDefault(a.get("type"),a.get("constraints"))
         if(default!=""):
             default         = "??" + default
         #insert comma or semicolon for ending

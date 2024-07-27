@@ -1,4 +1,5 @@
 #!/bin/python3.11
+
 import os,sys,helper,config
 from initializer import init
 from generator import generate
@@ -10,8 +11,8 @@ if(sys.argv[1]=="i" and (sys.argv[2] in config.lang.keys())):
   print( "initialized");
 
 elif(sys.argv[1]=="g"):
-  print("generating")
   generate(generator_dir,project_dir)
+  print("generating")
 
 else:
   helper.printHelp()

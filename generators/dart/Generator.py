@@ -15,7 +15,8 @@ def generate(data,program_config,program_root):
     _database_dir=program_root+"/"+program_config.get("name")+"/lib/"+database_dir
     #database dir
     Path(_database_dir).mkdir(parents=True, exist_ok=True)
-    database.generate(data,program_config)
+    with open(_database_dir + "DatabaseProvider.dart","w") as f:
+        f.write(orm.generate(data,program_config))
 
 
 

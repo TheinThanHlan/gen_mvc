@@ -38,7 +38,8 @@ class {class_name}Dao implements IMVCDao<{class_name}>{{
 
 
 
-
+def generateCreate():
+    pass
 
 
 
