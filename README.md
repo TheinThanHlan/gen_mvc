@@ -43,7 +43,7 @@ export path into your .bashrc
 
 
 
-## Run Locally
+## Run
 
 create a project directory and go there
 ```bash

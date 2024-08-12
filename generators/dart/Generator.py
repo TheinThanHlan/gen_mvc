@@ -4,7 +4,8 @@ from pathlib import Path
 
 dao_dir="data/dao/"
 model_dir="data/model/"
-database_dir="data/databases/"
+database_dir="assets/databases/"
+global_config_dir="assets/"
 def generate(data,program_config,program_root):
 
     #generate MVC classes
@@ -12,12 +13,18 @@ def generate(data,program_config,program_root):
 
 
     #generate database
-    _database_dir=program_root+"/"+program_config.get("name")+"/lib/"+database_dir
+    _database_dir=program_root+"/"+program_config.get("name")+"/"+database_dir
     #database dir
     Path(_database_dir).mkdir(parents=True, exist_ok=True)
-    with open(_database_dir + "DatabaseProvider.dart","w") as f:
+    with open(_database_dir + "database.sql","w") as f:
         f.write(orm.generate(data,program_config))
 
+    #generate global config file
+    _global_config_dir=program_root+"/"+program_config.get("name")+"/"+global_config_dir
+    Path(_global_config_dir).mkdir(parents=True, exist_ok=True)
+    global_config_format="""{{"name":"{project_name}"}}"""
+    with open(_global_config_dir + "global.json","w") as f:
+        f.write(global_config_format.format(project_name=program_config.get("name")))
 
 
 

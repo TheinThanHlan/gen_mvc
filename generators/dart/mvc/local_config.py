@@ -1,3 +1,4 @@
+sql_maps=["OneToOne","ManyToOne","OneToMany","ManyToMany"]
 types={
     "string": {
         "name": "String",
@@ -29,6 +30,11 @@ types={
         "builtin_default": "false",
         "sqlite": "INTEGER"  # SQLite does not have a separate Boolean storage class. Instead, boolean values are stored as integers 0 (false) and 1 (true).
     },
+    "datetime": {
+        "name": "DateTime",
+        "builtin_default": "DateTime.now()",
+        "sqlite": "TEXT"  # SQLite stores dates and times as TEXT, REAL, or INTEGER.
+    },
     "list": {
         "name": "List",
         "builtin_default": "[]",
@@ -39,16 +45,10 @@ types={
         "builtin_default": "{}",
         "sqlite": "TEXT"  # As above, stored as JSON strings.
     },
-    "datetime": {
-        "name": "DateTime",
-        "builtin_default": "DateTime.now()",
-        "sqlite": "TEXT"  # SQLite stores dates and times as TEXT, REAL, or INTEGER.
-    }
 
 }
 
-
-def variableTypeParser(var):
+def dartVariableTypeParser(var):
     output = ""
     if ("<" not in var) and (">" not in var):
         output = types.get(var,{}).get("name",var)
@@ -82,11 +82,17 @@ def getBuiltinVariableDefault(var,constraints):
                 break
             else:
                 b += a
-    if (not output in types.keys()) and  ("not null" in constraints.lower() or  "primary key" in constraints.lower()):
+    if (not output in types.keys()) and  ("not null" in constraints or  "primary key" in constraints):
         raise Exception("in variable type '"+var+"' the default value must be specify" )
     else:
         return types.get(output,{}).get("builtin_default","")
 
+def variableTypeParser(variableType):
+    return variableType.replace("<",",").replace(">",",").split(",")
 
 
+def getPrimaryKeyOfColumn(column_type,data):
+    for a in data.get(column_type).get("variables"):
+        if "primary key" in a.get("constraints").lower():
+            return a
 

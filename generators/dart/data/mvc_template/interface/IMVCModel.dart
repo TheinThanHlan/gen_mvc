@@ -1,4 +1,4 @@
-abstract class IMVCModel {
+interface class IMVCModel {
   // Map<String, dynamic> toJson();
   // factory MVCModel.fromJson(Map<String, dynamic> json) {
   //   throw UnimplementedError('fromJson() has not been implemented.');
