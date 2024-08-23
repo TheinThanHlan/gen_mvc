@@ -7,8 +7,8 @@ def init(generator_root,program_root,lang):
         f.write(str(config));
 
     os.system("flutter create "+program_root+"/"+name)
-
+    
     utils.copyData(generator_root,program_root,lang,name);
     utils.copyInputTemplate(generator_root,program_root,lang);
-
+    
 

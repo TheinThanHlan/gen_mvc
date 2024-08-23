@@ -59,18 +59,25 @@ gen_mvc i flutter
 * create the files in input directories
 * template.py is the example for input
 
-generate the project
+
+
+generate the project 
 
 ```bash
-gen_mvc g
+gen_mvc g 
+cd test
+flutter run
 ```
+
+Dependencies
+```bash 
+flutter pub add sqflite sqflite_common_ffi
+```
+
+
 
 
 * the output files will be in output directory
 * copy them into your flutter project
-
-
-
-
 
 

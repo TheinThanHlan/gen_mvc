@@ -39,3 +39,4 @@ class MVCDatabaseProvider {
     return _instance!._db;
   }
 }
+

@@ -120,7 +120,13 @@ void delete({class_name} tmp) async {{
     await database.delete("{class_name}", where: "{id}=${{tmp.{id}}}");
 }}
     """
-    DELETE_TEMPLATE="""
+    MTM_DELETE_TEMPLATE="""
+void delete({class_name} tmp) async {{
+    var database = await MVCDatabaseProvider.getDatabase();
+    await database.delete("{class_name}", where: "{id}=${{tmp.{id}}}");
+    await database.delete("{class_name}", where: "{id}=${{tmp.{id}}}");
+}}
+
     """
     
     id=local_config.getPrimaryKeyOfColumn(class_name,data).get('name')
